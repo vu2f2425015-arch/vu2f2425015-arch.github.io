@@ -122,22 +122,11 @@
   /* Mobile menu */
   #mobile-menu { display: none; }
   #mobile-menu.open { display: block; }
-
-  /* Hero text glow */
-  .hero-subtitle {
-    color: #cbd5e1;
-    text-shadow: 0 0 18px rgba(96,165,250,0.5), 0 0 6px rgba(96,165,250,0.25);
-  }
-  .hero-about {
-    color: #c8d5e8;
-    text-shadow: 0 0 24px rgba(96,165,250,0.4), 0 0 8px rgba(148,163,184,0.25);
-  }
 </style>
 </head>
 <body class="bg-level-0 font-body-base text-body-base min-h-screen flex flex-col">
 
-<!-- VIDEO WARP BACKGROUND - fixed, covers entire page -->
-<div id="video-bg-wrapper" style="
+<div id="canvas-bg-wrapper" style="
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
@@ -146,18 +135,12 @@
   overflow: hidden;
   background-color: #000000;
 ">
-  <video id="bg-video" muted playsinline preload="auto" style="
+  <canvas id="hero-lightpass" style="
     position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 100%; min-height: 100%;
-    width: auto; height: auto;
-    object-fit: cover;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     opacity: 0.85;
-  ">
-    <source src="bg.mp4" type="video/mp4">
-  </video>
-  <!-- Dark overlay to ensure text readability -->
+  "></canvas>
   <div style="
     position: absolute;
     inset: 0;
@@ -171,7 +154,6 @@
   "></div>
 </div>
 
-<!-- NAV -->
 <nav id="navbar" class="fixed top-0 w-full z-50 backdrop-blur-md border-b border-outline-variant transition-all duration-300" style="z-index:50; background-color: rgba(0,0,0,0.60);">
   <div class="max-w-container-max mx-auto px-lg h-16 flex items-center justify-between">
     <div class="font-display-lg text-display-lg md:text-display-lg-mobile tracking-tighter text-primary text-xl font-bold">
@@ -192,7 +174,6 @@
       <span class="material-symbols-outlined">menu</span>
     </button>
   </div>
-  <!-- Mobile menu -->
   <div id="mobile-menu" class="md:hidden bg-[rgba(5,8,20,0.75)] backdrop-blur-[10px] border-t border-grid px-lg py-md flex flex-col gap-md">
     <a class="text-on-surface-variant hover:text-primary" href="#about">About</a>
     <a class="text-on-surface-variant hover:text-primary" href="#education">Education</a>
@@ -202,10 +183,8 @@
   </div>
 </nav>
 
-<!-- MAIN -->
 <main class="flex-grow pt-[80px] pb-xxl max-w-container-max mx-auto px-lg md:px-xl w-full" style="position:relative; z-index:10;">
 
-  <!-- ═══ HERO ═══ -->
   <section id="about" class="pt-xxl pb-xl relative">
     <div style="position: relative; z-index: 2;">
     <div class="mb-xs">
@@ -214,22 +193,19 @@
     <h1 class="font-display-lg text-display-lg md:text-[56px] text-on-surface tracking-tight mb-sm leading-tight">
       PANKAJ SIMADRI<br>GUJURI
     </h1>
-    <p class="hero-subtitle font-terminal-text text-sm mb-md flex items-center gap-2 flex-wrap">
+    <p class="text-on-surface-variant font-terminal-text text-sm mb-md flex items-center gap-2 flex-wrap">
       <span>2nd-year B.E. CSE (AI/ML) &nbsp;·&nbsp; Panvel, Maharashtra</span>
       <span class="inline-flex items-center gap-1.5">
         &nbsp;·&nbsp;<span class="w-2 h-2 rounded-full bg-green-400 inline-block status-dot"></span> Open to internships
       </span>
     </p>
-    <!-- About Me -->
-    <p class="hero-about font-body-base text-body-base max-w-2xl mb-lg">
+    <p class="font-body-base text-body-base text-on-surface-variant max-w-2xl mb-lg">
       I'm a second-year B.E. CSE (AI/ML) student who turned a 3-month internship into 2 published research papers and 2 dashboards now running in production. I like taking ideas from notebook to deployed app — and writing up what I learn along the way. Currently looking for an AI/ML or Data Science internship where I can keep building real tools, keep publishing, and grow fast alongside a team that ships.
     </p>
-    <!-- Typewriter terminal -->
     <div class="terminal-bg border border-grid rounded-lg p-md mb-xl max-w-xl font-terminal-text text-[13px]">
       <div class="text-on-surface-variant mb-1">root@pankaj-gujuri:~$</div>
       <div id="typewriter" class="text-accent-primary min-h-[22px]"><span class="terminal-cursor"></span></div>
     </div>
-    <!-- KPI cards -->
     <div class="grid grid-cols-3 gap-md mb-xl reveal">
       <div class="bg-level-1 border border-grid rounded-xl p-md text-center hover-card-glow">
         <div class="text-accent-primary font-headline-md text-headline-md font-bold">7.97</div>
@@ -244,7 +220,6 @@
         <div class="text-on-surface-variant text-body-sm font-body-sm mt-1">Dashboards Deployed</div>
       </div>
     </div>
-    <!-- CTA -->
     <div class="flex gap-md flex-wrap">
       <a href="#projects" class="bg-accent-primary text-[#000000] font-bold py-2 px-6 rounded hover:opacity-90 transition-opacity font-body-base">
         View Projects
@@ -256,10 +231,8 @@
         Read My Research
       </a>
     </div>
-    </div><!-- end z-index wrapper -->
-  </section>
+    </div></section>
 
-  <!-- ═══ EDUCATION ═══ -->
   <section id="education" class="mb-xxl reveal">
     <div class="mb-xl">
       <h2 class="font-headline-md text-headline-md text-on-surface section-header-rule">Education</h2>
@@ -286,7 +259,6 @@
     </div>
   </section>
 
-  <!-- ═══ EXPERIENCE ═══ -->
   <section class="mb-xxl reveal">
     <div class="mb-xl">
       <h2 class="font-headline-md text-headline-md text-on-surface section-header-rule">Experience</h2>
@@ -306,16 +278,13 @@
     </div>
   </section>
 
-  <!-- ═══ PROJECTS ═══ -->
   <section id="projects" class="mb-xxl">
     <div class="mb-xl">
       <h2 class="font-headline-md text-headline-md text-on-surface section-header-rule">Projects</h2>
     </div>
 
-    <!-- Project Grid - all 4 equal cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-xl">
 
-      <!-- EduPro -->
       <div class="reveal bg-level-1 border border-grid rounded-xl hover-card-glow flex flex-col p-lg">
         <div class="mb-auto">
           <div class="flex items-center gap-sm mb-xs">
@@ -345,19 +314,14 @@
             <div class="text-accent-primary">$ <span class="terminal-cursor"></span></div>
           </div>
         </div>
-        <div class="flex gap-md mt-auto pt-sm flex-wrap">
+        <div class="flex gap-md mt-auto pt-sm">
           <a href="https://github.com/vu2f2425015-arch/edupro-analytics-dashboard" target="_blank" rel="noopener noreferrer"
              class="bg-accent-primary text-[#000000] font-bold py-1.5 px-4 rounded hover:opacity-90 transition-opacity font-body-sm text-body-sm">
             View on GitHub
           </a>
-          <a href="https://vu2f2425015-arch-edupro-analytics-da-edupro-dashboardapp-tom7hr.streamlit.app/" target="_blank" rel="noopener noreferrer"
-             class="inline-flex items-center gap-1.5 border border-[#60A5FA] text-[#60A5FA] bg-transparent font-bold py-1.5 px-4 rounded hover:bg-[#60A5FA] hover:text-[#000000] transition-all font-body-sm text-body-sm">
-            <span style="font-size:13px;">▶</span> Live Demo
-          </a>
         </div>
       </div>
 
-      <!-- Afficionado -->
       <div class="reveal bg-level-1 border border-grid rounded-xl hover-card-glow flex flex-col p-lg">
         <div class="mb-auto">
           <div class="flex items-center gap-sm mb-xs">
@@ -387,19 +351,14 @@
             <div class="text-accent-primary">$ <span class="terminal-cursor"></span></div>
           </div>
         </div>
-        <div class="flex gap-md mt-auto pt-sm flex-wrap">
+        <div class="flex gap-md mt-auto pt-sm">
           <a href="https://github.com/vu2f2425015-arch/afficionado-dashboard" target="_blank" rel="noopener noreferrer"
              class="bg-accent-primary text-[#000000] font-bold py-1.5 px-4 rounded hover:opacity-90 transition-opacity font-body-sm text-body-sm">
             View on GitHub
           </a>
-          <a href="https://afficionado-dashboard-ufqyx7quoyvm5jlgtoky3k.streamlit.app/" target="_blank" rel="noopener noreferrer"
-             class="inline-flex items-center gap-1.5 border border-[#60A5FA] text-[#60A5FA] bg-transparent font-bold py-1.5 px-4 rounded hover:bg-[#60A5FA] hover:text-[#000000] transition-all font-body-sm text-body-sm">
-            <span style="font-size:13px;">▶</span> Live Demo
-          </a>
         </div>
       </div>
 
-      <!-- GovAware -->
       <div class="reveal bg-level-1 border border-grid rounded-xl hover-card-glow flex flex-col p-lg">
         <div class="mb-auto">
           <div class="flex items-center gap-sm mb-xs">
@@ -437,7 +396,6 @@
         </div>
       </div>
 
-      <!-- TAB-MEMORY -->
       <div class="reveal bg-level-1 border border-grid rounded-xl hover-card-glow flex flex-col p-lg">
         <div class="mb-auto">
           <div class="flex items-center gap-sm mb-xs">
@@ -476,13 +434,11 @@
     </div>
   </section>
 
-  <!-- ═══ SKILLS ═══ -->
   <section class="mb-xxl reveal">
     <div class="mb-xl">
       <h2 class="font-headline-md text-headline-md text-on-surface section-header-rule">Skills & Stack</h2>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
-      <!-- Languages -->
       <div class="bg-level-1 border border-grid rounded-xl p-lg border-l-4 border-l-[#60A5FA]">
         <h3 class="font-terminal-text text-[#60A5FA] text-sm tracking-widest mb-md">LANGUAGES</h3>
         <div class="space-y-sm">
@@ -508,7 +464,6 @@
           </div>
         </div>
       </div>
-      <!-- AI Tools -->
       <div class="bg-level-1 border border-grid rounded-xl p-lg border-l-4 border-l-[#C084FC]">
         <h3 class="font-terminal-text text-[#C084FC] text-sm tracking-widest mb-md">AI TOOLS</h3>
         <div class="flex flex-wrap gap-xs">
@@ -519,7 +474,6 @@
           <span class="bg-[rgba(10,15,40,0.80)] text-[#e2e8f0] px-[8px] py-[4px] rounded font-code-label text-code-label">Claude</span>
         </div>
       </div>
-      <!-- Platforms -->
       <div class="bg-level-1 border border-grid rounded-xl p-lg border-l-4 border-l-[#60A5FA]">
         <h3 class="font-terminal-text text-[#60A5FA] text-sm tracking-widest mb-md">PLATFORMS</h3>
         <div class="flex flex-wrap gap-xs">
@@ -531,7 +485,6 @@
           <span class="bg-[rgba(10,15,40,0.80)] text-[#e2e8f0] px-[8px] py-[4px] rounded font-code-label text-code-label">Antigravity</span>
         </div>
       </div>
-      <!-- Other -->
       <div class="bg-level-1 border border-grid rounded-xl p-lg border-l-4 border-l-[#C084FC]">
         <h3 class="font-terminal-text text-[#C084FC] text-sm tracking-widest mb-md">OTHER</h3>
         <div class="flex flex-wrap gap-xs">
@@ -545,7 +498,6 @@
     </div>
   </section>
 
-  <!-- ═══ RESEARCH ═══ -->
   <section id="research" class="mb-xxl reveal">
     <div class="mb-xl">
       <h2 class="font-headline-md text-headline-md text-on-surface section-header-rule">Research & Publications</h2>
@@ -612,7 +564,6 @@
     </div>
   </section>
 
-  <!-- ═══ ACHIEVEMENTS ═══ -->
   <section class="mb-xxl reveal">
     <div class="mb-xl">
       <h2 class="font-headline-md text-headline-md text-on-surface section-header-rule">Achievements</h2>
@@ -642,7 +593,6 @@
     </div>
   </section>
 
-  <!-- ═══ CONTACT ═══ -->
   <section id="contact" class="mb-xxl text-center reveal">
     <h2 class="font-headline-md text-headline-md text-on-surface mb-sm">Let's Build Something</h2>
     <p class="font-body-base text-body-base text-on-surface-variant max-w-2xl mx-auto mb-lg">
@@ -670,7 +620,6 @@
 
 </main>
 
-<!-- FOOTER -->
 <footer class="w-full py-lg border-t border-grid mt-auto" style="position:relative; z-index:10;">
   <div class="max-w-container-max mx-auto px-lg text-center font-terminal-text text-[12px] text-[#4b5563]">
     Built by Pankaj Gujuri &middot; 2026
@@ -732,52 +681,78 @@
     });
   });
 
-  // ── Scroll-driven video background (smooth lerp) ──
-  (function () {
-    const video = document.getElementById("bg-video");
-    if (!video) return;
+  // ── Apple-Style Canvas Scroll Animation ──
+  const canvas = document.getElementById("hero-lightpass");
+  const context = canvas.getContext("2d");
 
-    let targetTime = 0;   // where scroll says we should be
-    let currentTime = 0;  // smoothed current position
-    let rafId = null;
-    const LERP = 0.08;    // smoothing factor: lower = smoother but slower
+  // Set canvas dimensions to match the window
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 
-    function getTargetTime() {
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = maxScroll > 0 ? Math.max(0, Math.min(1, window.scrollY / maxScroll)) : 0;
-      return progress * (video.duration || 30);
-    }
+  // Update this to the total number of frames you extracted
+  const frameCount = 148; 
 
-    function lerp(a, b, t) { return a + (b - a) * t; }
+  // Formats the number to match your files (e.g., frame_0001.jpg)
+  const currentFrame = index => (
+    `./frames/frame_${(index + 1).toString().padStart(4, '0')}.jpg`
+  );
 
-    function tick() {
-      currentTime = lerp(currentTime, targetTime, LERP);
-      // Only write if meaningfully different (avoids stutter from tiny writes)
-      if (Math.abs(video.currentTime - currentTime) > 0.01) {
-        video.currentTime = currentTime;
-      }
-      const stillMoving = Math.abs(targetTime - currentTime) > 0.005;
-      if (stillMoving) {
-        rafId = requestAnimationFrame(tick);
-      } else {
-        rafId = null;
-      }
-    }
+  const images = [];
+  let currentFrameIndex = 0;
 
-    function onScroll() {
-      targetTime = getTargetTime();
-      if (!rafId) {
-        rafId = requestAnimationFrame(tick);
-      }
-    }
+  // Preload all images into the browser's memory so there is no lag
+  for (let i = 0; i < frameCount; i++) {
+    const img = new Image();
+    img.src = currentFrame(i);
+    images.push(img);
+  }
 
-    // Pause video entirely — we drive it by setting currentTime, not playing
-    video.addEventListener("loadedmetadata", () => { video.pause(); video.currentTime = 0; });
-    if (video.readyState >= 1) { video.pause(); video.currentTime = 0; }
+  // Draw the first frame as soon as it loads
+  images[0].onload = render;
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-  })();
+  function render() {
+    // Clear the canvas to a clean white background
+    context.fillStyle = "#ffffff";
+    context.fillRect(0, 0, canvas.width, canvas.height);
 
+    const img = images[currentFrameIndex];
+    if(!img) return;
+
+    // Calculate scaling to ensure the image covers the screen without stretching (like object-fit: cover)
+    const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
+    const x = (canvas.width / 2) - (img.width / 2) * scale;
+    const y = (canvas.height / 2) - (img.height / 2) * scale;
+    
+    context.drawImage(img, x, y, img.width * scale, img.height * scale);
+  }
+
+  // Tie the frame index to the scroll position
+  window.addEventListener('scroll', () => {  
+    const scrollTop = document.documentElement.scrollTop;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    
+    // Calculate how far down the page we are (0.0 to 1.0)
+    const scrollFraction = scrollTop / maxScroll;
+
+    // Map the scroll fraction to the frame number
+    const frameIndex = Math.min(
+      frameCount - 1,
+      Math.ceil(scrollFraction * frameCount)
+    );
+
+    // Use requestAnimationFrame for the smoothest possible render
+    requestAnimationFrame(() => {
+      currentFrameIndex = frameIndex;
+      render();
+    });
+  });
+
+  // Re-calculate dimensions if the user resizes their browser
+  window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      render();
+  });
 </script>
 </body>
 </html>
