@@ -167,6 +167,7 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    position: relative;
     border: 1px solid rgba(255,255,255,0.15);
     box-shadow: 0 4px 20px rgba(0,0,0,0.35);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -532,6 +533,71 @@
     transition: all 0.2s;
   }
   .view-details-btn:hover { background: rgba(59,130,246,0.1); border-color: #60A5FA; }
+
+  /* ═══════════════ MOBILE IMPROVEMENTS ═══════════════ */
+
+  /* Project card button rows always wrap */
+  .project-card-clickable .mt-auto.pt-sm { flex-wrap: wrap; gap: 8px; }
+
+  @media (max-width: 639px) {
+
+    /* ── Vertical spacing: less breathing room on small screens ── */
+    .mb-xxl { margin-bottom: 52px !important; }
+    .pt-xxl { padding-top: 40px !important; }
+    .mb-xl  { margin-bottom: 28px !important; }
+    .gap-xl { gap: 20px !important; }
+
+    /* ── KPI cards: tighter padding ── */
+    .kpi-card-inner { padding: 10px 6px !important; }
+
+    /* ── Stack cards: readable at 3 per row ── */
+    .stack-card { padding: 16px 8px 12px !important; }
+    .stack-card img, .stack-card svg { width: 38px !important; height: 38px !important; }
+    .stack-card-name { font-size: 10px !important; }
+    .stack-card-info-text { font-size: 12px !important; line-height: 1.55 !important; }
+    .stack-card-info { padding: 12px 10px !important; }
+    .stack-center-glow { width: 160px !important; height: 120px !important; }
+
+    /* ── Modal topbar: truncate long titles ── */
+    .proj-modal-topbar { padding: 10px 14px !important; gap: 8px !important; }
+    .proj-modal-title-bar {
+      font-size: 12px !important;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      max-width: calc(100vw - 150px);
+    }
+
+    /* ── Modal mockup: laptop fills screen width ── */
+    .mockup-row { padding: 20px 10px 16px !important; gap: 0 !important; }
+    .device-laptop-screen {
+      width: calc(100vw - 28px) !important;
+      max-width: 320px !important;
+    }
+    .device-laptop-base {
+      width: calc(100vw - 0px) !important;
+      max-width: 364px !important;
+    }
+
+    /* ── Modal content layout ── */
+    .proj-content-layout { padding: 0 14px !important; gap: 20px !important; }
+    .proj-approach-title { font-size: 17px !important; line-height: 1.3 !important; }
+    .proj-approach-desc { font-size: 14px !important; }
+    .proj-section-title { font-size: 14px !important; }
+    .proj-section-body { font-size: 13px !important; }
+    .proj-sidebar { position: static !important; top: auto !important; }
+
+    /* Modal buttons: comfortable tap targets */
+    .proj-btn-primary, .proj-btn-secondary { min-height: 44px !important; font-size: 14px !important; }
+
+    /* ── Reduce section heading size on mobile only ── */
+    .section-header-rule { font-size: 20px !important; }
+
+    /* ── Tap targets: hero CTA and contact buttons get 44 px min-height ── */
+    #about .flex-col a,
+    #contact .flex-col a { min-height: 44px !important; }
+
+    /* ── Research article headings scale down ── */
+    article .font-headline-md { font-size: 17px !important; }
+  }
 </style>
 </head>
 <body class="bg-level-0 font-body-base text-body-base min-h-screen flex flex-col">
@@ -592,12 +658,26 @@
     </button>
   </div>
   <!-- Mobile menu -->
-  <div id="mobile-menu" class="md:hidden bg-[rgba(5,8,20,0.75)] backdrop-blur-[10px] border-t border-grid px-lg py-md flex flex-col gap-md">
-    <a class="text-on-surface-variant hover:text-primary" href="#about">About</a>
-    <a class="text-on-surface-variant hover:text-primary" href="#education">Education</a>
-    <a class="text-on-surface-variant hover:text-primary" href="#projects">Projects</a>
-    <a class="text-on-surface-variant hover:text-primary" href="#research">Research</a>
-    <a class="text-on-surface-variant hover:text-primary" href="#contact">Contact</a>
+  <div id="mobile-menu" class="md:hidden bg-[rgba(3,5,16,0.97)] backdrop-blur-[16px] border-t border-grid px-lg py-sm flex flex-col">
+    <a class="flex items-center gap-3 text-on-surface-variant hover:text-primary py-[15px] text-[15px] font-medium border-b border-grid/30 transition-colors" href="#about" onclick="closeMobileMenu()">
+      <span class="material-symbols-outlined text-accent-primary" style="font-size:18px;">person</span> About
+    </a>
+    <a class="flex items-center gap-3 text-on-surface-variant hover:text-primary py-[15px] text-[15px] font-medium border-b border-grid/30 transition-colors" href="#education" onclick="closeMobileMenu()">
+      <span class="material-symbols-outlined text-accent-primary" style="font-size:18px;">school</span> Education
+    </a>
+    <a class="flex items-center gap-3 text-on-surface-variant hover:text-primary py-[15px] text-[15px] font-medium border-b border-grid/30 transition-colors" href="#projects" onclick="closeMobileMenu()">
+      <span class="material-symbols-outlined text-accent-primary" style="font-size:18px;">rocket_launch</span> Projects
+    </a>
+    <a class="flex items-center gap-3 text-on-surface-variant hover:text-primary py-[15px] text-[15px] font-medium border-b border-grid/30 transition-colors" href="#research" onclick="closeMobileMenu()">
+      <span class="material-symbols-outlined text-accent-primary" style="font-size:18px;">article</span> Research
+    </a>
+    <a class="flex items-center gap-3 text-on-surface-variant hover:text-primary py-[15px] text-[15px] font-medium border-b border-grid/30 transition-colors" href="#contact" onclick="closeMobileMenu()">
+      <span class="material-symbols-outlined text-accent-primary" style="font-size:18px;">mail</span> Contact
+    </a>
+    <a href="#contact" onclick="closeMobileMenu()"
+       class="mt-3 mb-1 flex items-center justify-center gap-2 bg-accent-primary text-[#000000] font-bold py-[14px] px-6 rounded text-[15px]">
+      💼 Hire Me
+    </a>
   </div>
 </nav>
 
@@ -610,7 +690,7 @@
     <div class="mb-xs">
       <span class="font-terminal-text text-[13px] text-accent-primary tracking-widest">&gt; initializing portfolio...</span>
     </div>
-    <h1 class="font-display-lg text-display-lg md:text-[56px] text-on-surface tracking-tight mb-sm leading-tight">
+    <h1 class="font-display-lg text-[30px] sm:text-[42px] md:text-[56px] text-on-surface tracking-tight mb-sm leading-tight">
       PANKAJ SIMADRI<br>GUJURI
     </h1>
     <p class="text-on-surface-variant font-terminal-text text-sm mb-md flex items-center gap-2 flex-wrap">
@@ -629,29 +709,29 @@
       <div id="typewriter" class="text-accent-primary min-h-[22px]"><span class="terminal-cursor"></span></div>
     </div>
     <!-- KPI cards -->
-    <div class="grid grid-cols-3 gap-md mb-xl reveal">
-      <div class="bg-level-1 border border-grid rounded-xl p-md text-center hover-card-glow">
-        <div class="text-accent-primary font-headline-md text-headline-md font-bold">7.97</div>
-        <div class="text-on-surface-variant text-body-sm font-body-sm mt-1">CGPA / 10</div>
+    <div class="grid grid-cols-3 gap-sm sm:gap-md mb-xl reveal">
+      <div class="bg-level-1 border border-grid rounded-xl p-sm sm:p-md text-center hover-card-glow kpi-card-inner">
+        <div class="text-accent-primary text-[22px] sm:text-[24px] font-bold font-headline-md kpi-num">7.97</div>
+        <div class="text-on-surface-variant text-[11px] sm:text-body-sm font-body-sm mt-1">CGPA / 10</div>
       </div>
-      <div class="bg-level-1 border border-grid rounded-xl p-md text-center hover-card-glow">
-        <div class="text-accent-primary font-headline-md text-headline-md font-bold">3</div>
-        <div class="text-on-surface-variant text-body-sm font-body-sm mt-1">Research Papers</div>
+      <div class="bg-level-1 border border-grid rounded-xl p-sm sm:p-md text-center hover-card-glow kpi-card-inner">
+        <div class="text-accent-primary text-[22px] sm:text-[24px] font-bold font-headline-md kpi-num">3</div>
+        <div class="text-on-surface-variant text-[11px] sm:text-body-sm font-body-sm mt-1">Research Papers</div>
       </div>
-      <div class="bg-level-1 border border-grid rounded-xl p-md text-center hover-card-glow">
-        <div class="text-accent-primary font-headline-md text-headline-md font-bold">2</div>
-        <div class="text-on-surface-variant text-body-sm font-body-sm mt-1">Dashboards Deployed</div>
+      <div class="bg-level-1 border border-grid rounded-xl p-sm sm:p-md text-center hover-card-glow kpi-card-inner">
+        <div class="text-accent-primary text-[22px] sm:text-[24px] font-bold font-headline-md kpi-num">2</div>
+        <div class="text-on-surface-variant text-[11px] sm:text-body-sm font-body-sm mt-1">Dashboards Deployed</div>
       </div>
     </div>
     <!-- CTA -->
-    <div class="flex gap-md flex-wrap">
-      <a href="#projects" class="bg-accent-primary text-[#000000] font-bold py-2 px-6 rounded hover:opacity-90 transition-opacity font-body-base">
+    <div class="flex flex-col sm:flex-row gap-sm sm:gap-md sm:flex-wrap">
+      <a href="#projects" class="flex items-center justify-center bg-accent-primary text-[#000000] font-bold py-2 px-6 rounded hover:opacity-90 transition-opacity font-body-base">
         View Projects
       </a>
-      <a href="resume.pdf" download="Pankaj_Gujuri_Resume.pdf" class="inline-flex items-center gap-2 bg-transparent border border-accent-research text-accent-research font-bold py-2 px-6 rounded hover:bg-[#C084FC] hover:text-[#000000] transition-all font-body-base">
+      <a href="resume.pdf" download="Pankaj_Gujuri_Resume.pdf" class="inline-flex items-center justify-center gap-2 bg-transparent border border-accent-research text-accent-research font-bold py-2 px-6 rounded hover:bg-[#C084FC] hover:text-[#000000] transition-all font-body-base">
         <span class="material-symbols-outlined" style="font-size:18px;">download</span> Download Resume
       </a>
-      <a href="#research" class="bg-transparent border border-grid text-on-surface font-medium py-2 px-6 rounded hover:border-[#60A5FA] hover:text-[#60A5FA] transition-colors font-body-base">
+      <a href="#research" class="flex items-center justify-center bg-transparent border border-grid text-on-surface font-medium py-2 px-6 rounded hover:border-[#60A5FA] hover:text-[#60A5FA] transition-colors font-body-base">
         Read My Research
       </a>
     </div>
@@ -1203,20 +1283,20 @@
     <p class="font-body-base text-body-base text-on-surface-variant max-w-2xl mx-auto mb-lg">
       Open to AI/ML internships, research collaborations, and interesting problems.
     </p>
-    <div class="flex justify-center items-center gap-md flex-wrap">
-      <a class="inline-flex items-center gap-sm border border-grid text-on-surface-variant bg-transparent font-medium py-2 px-5 rounded hover:border-[#60A5FA] hover:text-[#60A5FA] transition-colors font-body-sm text-body-sm"
+    <div class="flex flex-col sm:flex-row justify-center sm:items-center gap-sm sm:gap-md sm:flex-wrap">
+      <a class="inline-flex items-center justify-center gap-sm border border-grid text-on-surface-variant bg-transparent font-medium py-2 px-5 rounded hover:border-[#60A5FA] hover:text-[#60A5FA] transition-colors font-body-sm text-body-sm"
          href="https://mail.google.com/mail/?view=cm&to=vu2f2425015@pvppcoe.ac.in&su=Internship%20Opportunity" target="_blank" rel="noopener noreferrer">
         <span class="material-symbols-outlined" style="font-size:18px;">mail</span> Email
       </a>
-      <a class="inline-flex items-center gap-sm border border-grid text-on-surface-variant bg-transparent font-medium py-2 px-5 rounded hover:border-[#60A5FA] hover:text-[#60A5FA] transition-colors font-body-sm text-body-sm"
+      <a class="inline-flex items-center justify-center gap-sm border border-grid text-on-surface-variant bg-transparent font-medium py-2 px-5 rounded hover:border-[#60A5FA] hover:text-[#60A5FA] transition-colors font-body-sm text-body-sm"
          href="https://linkedin.com/in/pankaj-gujuri-0a24973b2" target="_blank" rel="noopener noreferrer">
         <span class="font-terminal-text text-[16px] leading-none">in</span> LinkedIn
       </a>
-      <a class="inline-flex items-center gap-sm border border-grid text-on-surface-variant bg-transparent font-medium py-2 px-5 rounded hover:border-[#60A5FA] hover:text-[#60A5FA] transition-colors font-body-sm text-body-sm"
+      <a class="inline-flex items-center justify-center gap-sm border border-grid text-on-surface-variant bg-transparent font-medium py-2 px-5 rounded hover:border-[#60A5FA] hover:text-[#60A5FA] transition-colors font-body-sm text-body-sm"
          href="https://github.com/vu2f2425015-arch" target="_blank" rel="noopener noreferrer">
         <span class="material-symbols-outlined" style="font-size:18px;">code</span> GitHub
       </a>
-      <a class="inline-flex items-center gap-sm border border-accent-research text-accent-research bg-transparent font-medium py-2 px-5 rounded hover:bg-[#C084FC] hover:text-[#000000] transition-all font-body-sm text-body-sm"
+      <a class="inline-flex items-center justify-center gap-sm border border-accent-research text-accent-research bg-transparent font-medium py-2 px-5 rounded hover:bg-[#C084FC] hover:text-[#000000] transition-all font-body-sm text-body-sm"
          href="resume.pdf" download="Pankaj_Gujuri_Resume.pdf">
         <span class="material-symbols-outlined" style="font-size:18px;">download</span> Resume
       </a>
@@ -1363,8 +1443,16 @@
   });
 
   // ── Mobile menu ──
+  function closeMobileMenu() {
+    document.getElementById('mobile-menu').classList.remove('open');
+    const icon = document.querySelector('#menu-toggle .material-symbols-outlined');
+    if (icon) icon.textContent = 'menu';
+  }
   document.getElementById("menu-toggle").addEventListener("click", () => {
-    document.getElementById("mobile-menu").classList.toggle("open");
+    const m = document.getElementById("mobile-menu");
+    m.classList.toggle("open");
+    const icon = document.querySelector('#menu-toggle .material-symbols-outlined');
+    if (icon) icon.textContent = m.classList.contains('open') ? 'close' : 'menu';
   });
 
   // ── Smooth scroll ──
