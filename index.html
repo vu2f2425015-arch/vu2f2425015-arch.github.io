@@ -246,6 +246,79 @@
     letter-spacing: 0.04em;
   }
 
+  /* ── STACK INFO MODAL (mobile centered popup) ── */
+  .stack-info-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    background: rgba(0,0,0,0.80);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+  }
+  .stack-info-modal-overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+  .stack-info-modal-box {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    background: rgba(8, 11, 24, 0.98);
+    border: 1.5px solid rgba(59,130,246,0.4);
+    border-radius: 18px;
+    padding: 28px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+    box-shadow: 0 12px 48px rgba(59,130,246,0.25);
+    transform: scale(0.94);
+    transition: transform 0.2s ease;
+  }
+  .stack-info-modal-overlay.open .stack-info-modal-box {
+    transform: scale(1);
+  }
+  .stack-info-modal-icon-wrap img,
+  .stack-info-modal-icon-wrap svg {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+  }
+  .stack-info-modal-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 600;
+    color: #60A5FA;
+    letter-spacing: 0.04em;
+  }
+  .stack-info-modal-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: #cbd5e1;
+  }
+  .stack-info-modal-close {
+    position: absolute;
+    top: 10px; right: 12px;
+    font-size: 16px;
+    color: #64748b;
+    line-height: 1;
+    font-family: monospace;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .stack-info-modal-close:hover { color: #94a3b8; }
+
   /* ── PROJECT MODAL ── */
   .proj-modal-overlay {
     display: none;
@@ -554,8 +627,6 @@
     .stack-card { padding: 16px 8px 12px !important; }
     .stack-card img, .stack-card svg { width: 38px !important; height: 38px !important; }
     .stack-card-name { font-size: 10px !important; }
-    .stack-card-info-text { font-size: 12px !important; line-height: 1.55 !important; }
-    .stack-card-info { padding: 12px 10px !important; }
     .stack-center-glow { width: 160px !important; height: 120px !important; }
 
     /* ── Modal topbar: truncate long titles ── */
@@ -1268,7 +1339,9 @@
         </div>
       </article>
       <article class="bg-level-1 border border-grid rounded-xl hover-card-glow p-lg flex gap-md items-start">
-        <div class="text-[40px] leading-none shrink-0">🎽</div>
+        <div class="shrink-0 flex items-center justify-center" style="width:40px;height:40px;">
+          <span class="material-symbols-outlined text-accent-primary" style="font-size:40px; line-height:1;">sports_score</span>
+        </div>
         <div>
           <h3 class="font-headline-md text-headline-md text-on-surface mb-sm">Sports Secretary</h3>
           <p class="font-body-base text-body-base text-on-surface-variant">Led event coordination and athlete scheduling for College Sports Day</p>
@@ -1311,6 +1384,16 @@
     Built by Pankaj Gujuri &middot; 2026
   </div>
 </footer>
+
+<!-- ═══════════════ STACK INFO MODAL (mobile centered popup) ═══════════════ -->
+<div id="stack-info-modal" class="stack-info-modal-overlay" onclick="if(event.target===this) closeStackInfoModal()">
+  <div class="stack-info-modal-box">
+    <button class="stack-info-modal-close" onclick="closeStackInfoModal()" aria-label="Close">✕</button>
+    <div class="stack-info-modal-icon-wrap" id="stack-info-modal-icon-wrap"></div>
+    <div class="stack-info-modal-name" id="stack-info-modal-name"></div>
+    <div class="stack-info-modal-text" id="stack-info-modal-text"></div>
+  </div>
+</div>
 
 <!-- ═══════════════ PROJECT DETAIL MODAL ═══════════════ -->
 <div id="project-modal" class="proj-modal-overlay" role="dialog" aria-modal="true" aria-label="Project Details">
@@ -1464,11 +1547,42 @@
   });
 
   // ── STACK CARD INFO TOGGLE ──
+  // Desktop/tablet: small overlay inside the card (unchanged behaviour).
+  // Mobile (≤639px): centered popup modal so the description text never
+  // overflows the small card and stays fully readable.
+  function isMobileViewport() {
+    return window.matchMedia('(max-width: 639px)').matches;
+  }
+
   function toggleStackInfo(card) {
+    if (isMobileViewport()) {
+      openStackInfoModal(card);
+      return;
+    }
     const isOpen = card.classList.contains('info-open');
     document.querySelectorAll('.stack-card.info-open').forEach(c => c.classList.remove('info-open'));
     if (!isOpen) card.classList.add('info-open');
   }
+
+  function openStackInfoModal(card) {
+    const iconEl = card.querySelector('img, svg');
+    const name = card.querySelector('.stack-card-name')?.textContent || '';
+    const text = card.querySelector('.stack-card-info-text')?.textContent || '';
+
+    const iconWrap = document.getElementById('stack-info-modal-icon-wrap');
+    iconWrap.innerHTML = iconEl ? iconEl.outerHTML : '';
+    document.getElementById('stack-info-modal-name').textContent = name;
+    document.getElementById('stack-info-modal-text').textContent = text;
+
+    document.getElementById('stack-info-modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeStackInfoModal() {
+    document.getElementById('stack-info-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
   document.addEventListener('click', function(e) {
     if (!e.target.closest('.stack-card')) {
       document.querySelectorAll('.stack-card.info-open').forEach(c => c.classList.remove('info-open'));
@@ -1669,7 +1783,10 @@
 
   // Close on Escape
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeProjectModal();
+    if (e.key === 'Escape') {
+      closeProjectModal();
+      closeStackInfoModal();
+    }
   });
 
   // Keyboard accessibility for project cards
