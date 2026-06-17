@@ -846,7 +846,7 @@
       <div class="bg-level-1 border border-grid rounded-xl hover-card-glow p-lg relative">
         <span class="absolute top-4 right-4 px-2 py-0.5 text-accent-primary border border-accent-primary rounded text-[10px] font-code-label font-semibold tracking-wider">INTERNSHIP</span>
         <h3 class="font-headline-md text-headline-md text-on-surface mb-xs">AI/ML Intern</h3>
-        <p class="text-accent-research font-terminal-text text-sm mb-sm">Unified Mentor Pvt. Ltd. &nbsp;·&nbsp; Remote &nbsp;·&nbsp; Mar 2026 – May 2026</p>
+        <p class="text-accent-research font-terminal-text text-sm mb-sm">Unified Mentor Pvt. Ltd. &nbsp;·&nbsp; Remote &nbsp;·&nbsp; Mar 2026 – Jun 2026</p>
         <ul class="space-y-2 text-on-surface-variant font-body-base text-body-base">
           <li class="flex gap-sm"><span class="text-accent-primary mt-1 shrink-0">›</span> Contributed to AI/ML research resulting in 2 published research papers during the internship tenure.</li>
           <li class="flex gap-sm"><span class="text-accent-primary mt-1 shrink-0">›</span> Designed and deployed 2 production-ready analytical dashboards (EduPro Analytics & Afficionado) using Python.</li>
@@ -1007,6 +1007,9 @@
         <div class="mb-auto">
           <div class="flex items-center gap-sm mb-xs">
             <span class="px-2 py-0.5 text-accent-research border border-accent-research rounded text-[10px] font-code-label font-semibold tracking-wider">PRODUCTIVITY TOOL</span>
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 text-green-400 border border-green-400/40 rounded text-[10px] font-code-label font-semibold tracking-wider">
+              <span class="w-1.5 h-1.5 rounded-full bg-green-400 inline-block status-dot"></span> LIVE
+            </span>
           </div>
           <h3 class="font-headline-md text-headline-md text-on-surface mb-sm">TAB-MEMORY</h3>
           <p class="font-body-base text-body-base text-on-surface-variant mb-lg">
@@ -1031,8 +1034,12 @@
           </div>
         </div>
         <div class="flex gap-md mt-auto pt-sm">
+          <a href="https://tab-memory-e2y1tpd57-pankaj-gujuri-s-projects.vercel.app/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"
+             class="inline-flex items-center gap-1.5 bg-accent-primary text-[#000000] font-bold py-1.5 px-4 rounded hover:opacity-90 transition-opacity font-body-sm text-body-sm">
+            <span class="material-symbols-outlined" style="font-size:16px;">open_in_new</span> Live Demo
+          </a>
           <a href="https://github.com/vu2f2425015-arch/TAB-MEMORY" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()"
-             class="bg-accent-primary text-[#000000] font-bold py-1.5 px-4 rounded hover:opacity-90 transition-opacity font-body-sm text-body-sm">
+             class="bg-transparent border border-grid text-on-surface font-medium py-1.5 px-4 rounded hover:border-[#60A5FA] hover:text-[#60A5FA] transition-colors font-body-sm text-body-sm">
             View on GitHub
           </a>
           <button class="view-details-btn" onclick="event.stopPropagation(); openProjectModal('tabmemory')">
@@ -1616,10 +1623,7 @@
   // ── PROJECT MODAL ──
   const PROJECTS = {
     edupro: {
-      title: "EduPro Analytics Dashboard",
-      category: "Educational Technology",
-      client: "Unified Mentor Pvt. Ltd.",
-      duration: "2 months (Mar – May 2026)",
+      duration: "3 months (Mar – Jun 2026)",
       tech: ["Python", "Streamlit", "Pandas", "Data Analysis"],
       badges: [{ text: "● LIVE", cls: "badge-live" }, { text: "PAPER PUBLISHED", cls: "badge-published" }],
       liveUrl: "https://vu2f2425015-arch-edupro-analytics-da-edupro-dashboardapp-tom7hr.streamlit.app/",
@@ -1637,10 +1641,7 @@
       mockPie: { label: "Performance", legend: [{c:"#60A5FA",t:"High (45%)"},{c:"#C084FC",t:"Medium (32%)"},{c:"#4ade80",t:"Pass (15%)"},{c:"#f59e0b",t:"At Risk (8%)"}] },
     },
     afficionado: {
-      title: "Afficionado Dashboard",
-      category: "Audience Analytics",
-      client: "Unified Mentor Pvt. Ltd.",
-      duration: "2 months (Mar – May 2026)",
+      duration: "3 months (Mar – Jun 2026)",
       tech: ["Python", "Data Visualisation", "Streamlit", "AI-Assisted Dev"],
       badges: [{ text: "● LIVE", cls: "badge-live" }, { text: "PAPER PUBLISHED", cls: "badge-published" }],
       liveUrl: "https://afficionado-dashboard-ufqyx7quoyvm5jlgtoky3k.streamlit.app/",
@@ -1684,8 +1685,8 @@
       client: "Personal Project",
       duration: "Ongoing",
       tech: ["HTML", "JavaScript", "CSS"],
-      badges: [{ text: "PRODUCTIVITY TOOL", cls: "badge-productivity" }],
-      liveUrl: null,
+      badges: [{ text: "● LIVE", cls: "badge-live" }, { text: "PRODUCTIVITY TOOL", cls: "badge-productivity" }],
+      liveUrl: "https://tab-memory-e2y1tpd57-pankaj-gujuri-s-projects.vercel.app/",
       githubUrl: "https://github.com/vu2f2425015-arch/TAB-MEMORY",
       approachTitle: "My Approach: Fixing the 47-Tab Problem",
       approachDesc: "TAB-MEMORY was born from a real frustration: having 47 browser tabs open with no memory of why half of them exist. The tool lets users annotate any open tab with a purpose note, tag set, and optional reminder — so when you return to a session two days later, you instantly know why each tab is there and what to do with it.",
